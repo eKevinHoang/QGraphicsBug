@@ -36,7 +36,7 @@ cmake --build build --config Debug
 1. **Start from step 1 of Bug 1**, or launch the app normally.  
 2. **Pan the image** by holding `Command` and dragging the mouse.  
    - ✅ **Expected:** The cursor should change to a **hand cursor (`Qt::OpenHandCursor`)** while panning.  
-3. Press `Command + Z` to trigger a **messagebox**.  
+3. Right click to trigger a **messagebox**.  
 4. Interact with the messagebox using the **keyboard** (e.g., press `Space` or `Tab` to navigate buttons).  
 5. Try panning the image again.  
    - ❌ **Issue:** The cursor remains **stuck as an arrow (`Qt::ArrowCursor`)**, even after clicking on the scene

@@ -140,6 +140,27 @@ void ImageViewer::mousePressEvent(QMouseEvent* event) {
             QGraphicsView::setTransformationAnchor(QGraphicsView::NoAnchor);
             viewport()->setCursor(Qt::ClosedHandCursor);
         }
+    } else if (event->button() == Qt::RightButton && !event->modifiers()) {
+        QMessageBox confirmBox;
+        confirmBox.setMinimumWidth(640);
+        confirmBox.setIcon(QMessageBox::Warning);
+        confirmBox.setWindowTitle("Confirm Reset");
+        confirmBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        confirmBox.setDefaultButton(QMessageBox::No);  // Default to "No" to prevent accidental resets
+        confirmBox.setText("Do you want to change the color of the selected rect item?");
+        if (confirmBox.exec() == QMessageBox::Yes) {
+            // After the user selects YES in the confirmBox, we need to perform some interaction, such as working with RectItem or showing a menu/dialog.
+            // In this minimal example, we simply iterate over RectItems without modifying them.
+            QList<QGraphicsItem*> sceneItems = scene()->items();
+            for (QGraphicsItem* item : sceneItems) {
+                if (item == imageItem) continue;
+                MyRectItem* myItem = dynamic_cast<MyRectItem*>(item);
+                if (myItem->rect().normalized().size() == QSizeF(1, 1)) {
+                    scene()->removeItem(myItem);
+                    delete myItem;
+                }
+            }
+        }
     }
 }
 
